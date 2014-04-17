@@ -9,12 +9,18 @@ class ImageClerkHelper {
 	}
 
 	public function getThumbnail($fID, $width, $height, $crop = 0) {
-		$img = new StdClass;
+		$img = $this->img->getThumbnail(File::getByID($fID), $width, $height, $crop);
 		$img->src = $this->getSource($fID, $width, $height, (int) $crop);
 		return $img;
 	}
 
-	public function outputThumbnail($fID, $width, $height, $crop = 0) {
+	public function outputThumbnail($fID, $width, $height, $alt = '', $return = false, $crop = false) {
+		$img = $this->getThumbnail($fID, $width, $height, $crop);
+		$html = '<img class="ccm-output-thumbnail" alt="' . $alt . '" src="' . $img->src . '" width="' . $img->width . '" height="' . $img->height . '" />';
+		if ($return) {
+			return $html;
+		}
+		echo $html;
 	}
 
 	public function validateToken($fID, $width, $height, $crop, $token) {
