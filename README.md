@@ -1,7 +1,7 @@
 Image Clerk
 -----------
 
-#### Create Persistant Image Thumbnails in concrete5
+#### Create Persistent Image Thumbnails in concrete5
 
 Because image thumbnails are generated at page render and are placed in the cache, these thumbnails can disappear when clearing out cache files.
 
