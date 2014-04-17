@@ -36,6 +36,6 @@ class ImageClerkHelper {
 
 	public function getSource($fID, $width, $height, $crop = 0) {
 		$token = $this->generateToken($fID, $width, $height, $crop);
-		return View::url('image_clerk', $fID, $width, $height, $crop, $token);
+		return View::url('image_clerk', $fID, $width, $height, $crop, urlencode($token));
 	}
 }
