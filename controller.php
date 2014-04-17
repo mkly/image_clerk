@@ -16,6 +16,14 @@ class ImageClerkPackage extends Package {
 	}
 
 	public function install() {
-		SinglePage::add('image_clerk', parent::install());
+		$sp = SinglePage::add('image_clerk', parent::install());
+		foreach (array(
+			'exclude_nav',
+			'exclude_page_list',
+			'exclude_sitemap_xml',
+			'exclude_search_index'
+		) as $handle) {
+			$sp->setAttribute($handle, 1);
+		}
 	}
 }
