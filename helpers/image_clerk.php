@@ -9,7 +9,8 @@ class ImageClerkHelper {
 	}
 
 	public function getThumbnail($fID, $width, $height, $crop = 0) {
-		$img = $this->img->getThumbnail(File::getByID($fID), $width, $height, $crop);
+		$file = is_object($fID) ? $fID : File::getByID($fID);
+		$img = $this->img->getThumbnail($file, $width, $height, $crop);
 		$img->src = $this->getSource($fID, $width, $height, (int) $crop);
 		return $img;
 	}
