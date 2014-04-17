@@ -13,11 +13,12 @@ class ImageClerkHelper {
 	 * @param int $width
 	 * @param int $height
 	 * @param int|bool $crop
+	 * @return StdObject Same image object as ImageHelper
 	 */
 	public function getThumbnail($fID, $width, $height, $crop = false) {
 		$file = is_object($fID) ? $fID : File::getByID($fID);
 		$img = $this->img->getThumbnail($file, $width, $height, $crop);
-		$img->src = $this->getSource($fID, $width, $height, $crop);
+		$img->src = $this->getSource($file->getFileID(), $width, $height, $crop);
 		return $img;
 	}
 
