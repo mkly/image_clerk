@@ -20,7 +20,6 @@ class ImageClerkPackage extends Package {
 		foreach (array(
 			'exclude_nav',
 			'exclude_page_list',
-			'exclude_sitemap_xml',
 			'exclude_search_index'
 		) as $handle) {
 			$sp->setAttribute($handle, 1);
