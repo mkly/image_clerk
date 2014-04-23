@@ -49,7 +49,7 @@ class ImageClerkHelper {
 	 * @return string
 	 */
 	public function validateToken($fID, $width, $height, $crop, $token) {
-		return $this->valt->validate($this->buildTokenString($fID, $width, $height, $crop), $token);
+		return $this->hashTokenString($this->buildTokenString($fID, $width, $height, $crop)) === $token;
 	}
 
 	/**
@@ -60,7 +60,16 @@ class ImageClerkHelper {
 	 * @return string
 	 */
 	public function buildTokenString($fID, $width, $height, $crop) {
-		return implode(':', array($fID, $width, $height, $crop));
+		$a = implode(':', array($fID, $width, $height, (string) (int) $crop, Config::get('SECURITY_TOKEN_VALIDATION')));
+		return $a;
+	}
+
+	/**
+	 * @param string $tokenString
+	 * @return string
+	 */
+	public function hashTokenString($tokenString) {
+		return sha1($tokenString);
 	}
 
 	/**
@@ -71,7 +80,7 @@ class ImageClerkHelper {
 	 * @param string
 	 */
 	public function generateToken($fID, $width, $height, $crop) {
-		return $this->valt->generate($this->buildTokenString($fID, $width, $height, $crop));
+		return $this->hashTokenString($this->buildTokenString($fID, $width, $height, $crop));
 	}
 
 	/**
